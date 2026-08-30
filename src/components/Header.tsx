@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import {
@@ -9,23 +8,28 @@ import {
   X,
   LogOut,
   Shield,
-  GraduationCap,
   ChevronDown,
   User,
   Settings,
   ShoppingBag,
   LayoutDashboard,
+  ExternalLink,
+  Building2,
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { isAdminEmail } from "@/lib/admin";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
-import HeaderLibraryLinks from "@/components/HeaderLibraryLinks";
+
+const ACADEMY_URL =
+  process.env.NEXT_PUBLIC_ACADEMY_URL?.replace(/\/$/, "") ||
+  "https://wisdom-tower-academy.vercel.app";
 
 const mainNavLinks = [
   { href: "/", label: "Home" },
-  { href: "/academy", label: "Academy" },
   { href: "/digital", label: "Digital" },
-  { href: "/services", label: "All Services" },
+  { href: "/services", label: "Services" },
+  { href: "/request", label: "Request" },
+  { href: "/apply", label: "Apply" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
@@ -92,39 +96,29 @@ export default function Header() {
     "User";
 
   const isAdmin = isAdminEmail(user?.email);
-  const showAcademyChrome = pathname.startsWith("/academy");
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-wisdom-dark/95 backdrop-blur-md border-b border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link
-            href={showAcademyChrome ? "/academy" : "/"}
-            className="flex items-center gap-2.5 group min-w-0"
-          >
+          <Link href="/" className="flex items-center gap-2.5 group min-w-0">
             {logoOk ? (
               <span className="relative w-9 h-9 shrink-0 rounded-lg overflow-hidden ring-1 ring-white/10 bg-wisdom-navy">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/images/brand/logo.png"
-                  alt="Wisdom Tower"
+                  alt="Wisdom Digital"
                   className="w-full h-full object-contain p-0.5"
                   onError={() => setLogoOk(false)}
                 />
               </span>
             ) : (
-              <div
-                className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm shrink-0 ${
-                  showAcademyChrome
-                    ? "bg-gradient-to-br from-amber-400 to-orange-500 text-wisdom-dark"
-                    : "bg-gradient-to-br from-wisdom-cyan to-wisdom-cyan-dark text-wisdom-dark"
-                }`}
-              >
-                {showAcademyChrome ? "WA" : "WT"}
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm shrink-0 bg-gradient-to-br from-wisdom-cyan to-wisdom-cyan-dark text-wisdom-dark">
+                WD
               </div>
             )}
             <span className="font-semibold text-lg tracking-tight group-hover:text-wisdom-cyan transition-colors truncate">
-              {showAcademyChrome ? "Wisdom Academy" : "Wisdom Tower"}
+              Wisdom Digital
             </span>
           </Link>
 
@@ -139,10 +133,18 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+            <a
+              href={ACADEMY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-sm text-wisdom-muted hover:text-amber-300 transition-colors"
+            >
+              Academy
+              <ExternalLink className="w-3.5 h-3.5 opacity-70" />
+            </a>
 
             {!loading && (
               <div className="flex items-center gap-1.5 ml-1">
-                <HeaderLibraryLinks />
                 {user ? (
                   <div className="relative" ref={profileRef}>
                     <button
@@ -174,18 +176,6 @@ export default function Header() {
                         </div>
                         <div className="py-1.5">
                           <Link
-                            href="/learning"
-                            role="menuitem"
-                            className="flex items-center gap-3 px-4 py-2.5 text-sm text-white/90 hover:bg-white/5"
-                            onClick={() => setProfileOpen(false)}
-                          >
-                            <GraduationCap className="w-4 h-4 text-amber-400" />
-                            My Learning
-                            <span className="ml-auto text-[10px] font-bold uppercase text-amber-400/80">
-                              Academy
-                            </span>
-                          </Link>
-                          <Link
                             href="/dashboard"
                             role="menuitem"
                             className="flex items-center gap-3 px-4 py-2.5 text-sm text-white/90 hover:bg-white/5"
@@ -193,18 +183,6 @@ export default function Header() {
                           >
                             <LayoutDashboard className="w-4 h-4 text-wisdom-cyan" />
                             My Dashboard
-                            <span className="ml-auto text-[10px] font-bold uppercase text-wisdom-cyan/80">
-                              Digital
-                            </span>
-                          </Link>
-                          <Link
-                            href="/cart"
-                            role="menuitem"
-                            className="flex items-center gap-3 px-4 py-2.5 text-sm text-white/90 hover:bg-white/5"
-                            onClick={() => setProfileOpen(false)}
-                          >
-                            <ShoppingBag className="w-4 h-4 text-wisdom-muted" />
-                            Academy cart
                           </Link>
                           <Link
                             href="/business/cart"
@@ -214,6 +192,15 @@ export default function Header() {
                           >
                             <ShoppingBag className="w-4 h-4 text-wisdom-muted" />
                             Business cart
+                          </Link>
+                          <Link
+                            href="/business/register"
+                            role="menuitem"
+                            className="flex items-center gap-3 px-4 py-2.5 text-sm text-white/90 hover:bg-white/5"
+                            onClick={() => setProfileOpen(false)}
+                          >
+                            <Building2 className="w-4 h-4 text-wisdom-muted" />
+                            Register business
                           </Link>
                           <Link
                             href="/account"
@@ -241,9 +228,20 @@ export default function Header() {
                               onClick={() => setProfileOpen(false)}
                             >
                               <Shield className="w-4 h-4" />
-                              Admin Dashboard
+                              Admin
                             </Link>
                           )}
+                          <a
+                            href={ACADEMY_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            role="menuitem"
+                            className="flex items-center gap-3 px-4 py-2.5 text-sm text-amber-300 hover:bg-white/5"
+                            onClick={() => setProfileOpen(false)}
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            Wisdom Academy
+                          </a>
                         </div>
                         <div className="border-t border-white/10 py-1.5">
                           <button
@@ -277,7 +275,6 @@ export default function Header() {
           </nav>
 
           <div className="md:hidden flex items-center gap-1" ref={menuRef}>
-            <HeaderLibraryLinks size="lg" onNavigate={() => setIsOpen(false)} />
             <button
               type="button"
               className="p-2 rounded-lg text-wisdom-muted hover:text-white"
@@ -300,46 +297,33 @@ export default function Header() {
                       {link.label}
                     </Link>
                   ))}
+                  <a
+                    href={ACADEMY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-4 py-2.5 text-sm text-amber-300 hover:bg-white/5"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Academy
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
                 </nav>
                 <div className="border-t border-white/10 px-4 py-3 space-y-1">
                   {user ? (
                     <>
-                      <Link
-                        href="/learning"
-                        className="flex items-center gap-2 text-sm py-1.5"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        <GraduationCap className="w-4 h-4 text-amber-400" /> My Learning
+                      <Link href="/dashboard" className="block text-sm py-1.5" onClick={() => setIsOpen(false)}>
+                        Dashboard
                       </Link>
-                      <Link
-                        href="/dashboard"
-                        className="flex items-center gap-2 text-sm py-1.5"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        <LayoutDashboard className="w-4 h-4 text-wisdom-cyan" /> My Dashboard
+                      <Link href="/account" className="block text-sm py-1.5" onClick={() => setIsOpen(false)}>
+                        Account
                       </Link>
-                      <Link
-                        href="/account"
-                        className="flex items-center gap-2 text-sm py-1.5"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        <User className="w-4 h-4" /> Account
-                      </Link>
-                      <button
-                        type="button"
-                        onClick={() => void handleLogout()}
-                        className="flex items-center gap-2 text-sm text-red-400 py-1.5 w-full text-left"
-                      >
-                        <LogOut className="w-4 h-4" /> Logout
+                      <button type="button" onClick={() => void handleLogout()} className="text-sm text-red-400 py-1.5">
+                        Logout
                       </button>
                     </>
                   ) : (
                     <>
-                      <Link
-                        href="/login"
-                        className="block text-center text-sm py-2"
-                        onClick={() => setIsOpen(false)}
-                      >
+                      <Link href="/login" className="block text-center text-sm py-2" onClick={() => setIsOpen(false)}>
                         Sign In
                       </Link>
                       <Link
