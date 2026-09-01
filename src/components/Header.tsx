@@ -22,7 +22,7 @@ import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 const ACADEMY_URL =
   process.env.NEXT_PUBLIC_ACADEMY_URL?.replace(/\/$/, "") ||
-  "https://wisdom-tower-academy.vercel.app";
+  "https://wisdom-tower-academy.live";
 
 const mainNavLinks = [
   { href: "/", label: "Home" },
