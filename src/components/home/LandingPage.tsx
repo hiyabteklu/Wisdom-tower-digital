@@ -16,7 +16,7 @@ const DIGITAL_IMAGE = "/images/home/digital.jpg";
 const HERO_BG = "/images/home/hero-bg.jpg";
 const ACADEMY_URL =
   process.env.NEXT_PUBLIC_ACADEMY_URL?.replace(/\/$/, "") ||
-  "https://wisdom-tower-academy.vercel.app";
+  "https://wisdom-tower-academy.live";
 
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false);
