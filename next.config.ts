@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const ACADEMY =
   process.env.NEXT_PUBLIC_ACADEMY_URL?.replace(/\/$/, "") ||
-  "https://wisdom-tower-academy.vercel.app";
+  "https://wisdom-tower-academy.live";
 
 const nextConfig: NextConfig = {
   async redirects() {
