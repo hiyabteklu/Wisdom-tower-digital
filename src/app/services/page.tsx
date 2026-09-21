@@ -27,13 +27,13 @@ export default function ServicesPage() {
     <div className="relative">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-wisdom-cyan/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl" />
       </div>
 
       <div className="relative py-14 md:py-22">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <div className="text-center mb-14 md:mb-18 animate-fade-up">
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 tracking-tight">
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 tracking-tight text-white">
               Our Services
             </h1>
             <p className="text-wisdom-muted max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
@@ -52,17 +52,17 @@ export default function ServicesPage() {
                     {iconMap[category.icon]}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h2 className="font-display text-lg sm:text-xl md:text-2xl font-bold truncate">
+                    <h2 className="font-display text-lg sm:text-xl md:text-2xl font-bold truncate text-white">
                       {category.name}
                     </h2>
                     <p className="text-xs sm:text-sm text-wisdom-muted line-clamp-1">{category.tagline}</p>
                   </div>
                   <Link
                     href={`/services/${category.id}`}
-                    className="hidden sm:inline-flex items-center gap-1 text-sm text-wisdom-cyan hover:underline shrink-0 font-medium"
+                    className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-wisdom-cyan text-wisdom-dark text-sm font-bold shrink-0 hover:opacity-90 transition"
                   >
                     View all
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
 
@@ -79,16 +79,15 @@ export default function ServicesPage() {
             ))}
           </div>
 
-          <div className="mt-24 relative overflow-hidden rounded-3xl border border-white/12 shadow-card-3d">
-            <div className="absolute inset-0 bg-gradient-to-br from-wisdom-cyan/12 via-wisdom-card to-purple-500/10" />
+          <div className="mt-24 relative overflow-hidden rounded-3xl border border-white/12 bg-wisdom-card shadow-card-3d">
             <div className="relative px-6 py-14 md:py-18 text-center">
-              <h2 className="font-display text-2xl md:text-3xl font-bold mb-3">Need something custom?</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-bold mb-3 text-white">Need something custom?</h2>
               <p className="text-wisdom-muted mb-8 max-w-lg mx-auto">
                 Don&apos;t see exactly what you need? We create tailored packages for unique projects.
               </p>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-wisdom-cyan text-wisdom-dark font-semibold hover:bg-wisdom-cyan-dark hover:shadow-glow hover:scale-105 transition-all duration-300"
+                className="inline-flex items-center gap-2 min-h-[3.25rem] px-10 py-4 rounded-2xl bg-wisdom-cyan text-wisdom-dark text-base font-bold hover:opacity-90 transition shadow-lg"
               >
                 Let&apos;s Build Together
                 <ArrowRight className="w-5 h-5" />
