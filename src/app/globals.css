@@ -7,7 +7,7 @@
 
 :root,
 .theme-dark {
-  /* Digital identity — teal (Academy uses amber) */
+  /* Digital — teal accent (Academy uses amber) */
   --background: #060b12;
   --foreground: #f2f8f7;
   --cyan: #2ee6c5;
@@ -27,7 +27,7 @@
 .theme-light {
   --background: #d4e4f4;
   --foreground: #0c1a2e;
-  --cyan: #0284c7;
+  --cyan: #0d9488;
   --card: #eef5fc;
   --wt-dark: #c5d8ec;
   --wt-navy: #b8cee6;
@@ -115,4 +115,95 @@ body {
 
 .theme-light .atm-glow-1 {
   background: rgba(14, 165, 233, 0.35);
+}
+
+.atm-glow-2 {
+  width: 36vw;
+  height: 36vw;
+  max-width: 440px;
+  max-height: 440px;
+  bottom: 5%;
+  right: 8%;
+  background: rgba(46, 200, 180, 0.28);
+}
+
+.theme-light .atm-glow-2 {
+  background: rgba(56, 189, 248, 0.28);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.text-wisdom-cyan { color: var(--cyan); }
+.bg-wisdom-cyan { background-color: var(--cyan); }
+.text-wisdom-dark { color: var(--wt-dark); }
+.bg-wisdom-dark { background-color: var(--wt-dark); }
+.bg-wisdom-navy { background-color: var(--wt-navy); }
+.bg-wisdom-card { background-color: var(--wt-card); }
+.text-wisdom-muted { color: var(--wt-muted); }
+.border-wisdom-cyan\/35 { border-color: color-mix(in srgb, var(--cyan) 35%, transparent); }
+.border-wisdom-cyan\/40 { border-color: color-mix(in srgb, var(--cyan) 40%, transparent); }
+.border-wisdom-cyan\/50 { border-color: color-mix(in srgb, var(--cyan) 50%, transparent); }
+.bg-wisdom-cyan\/10 { background-color: color-mix(in srgb, var(--cyan) 10%, transparent); }
+.bg-wisdom-cyan\/15 { background-color: color-mix(in srgb, var(--cyan) 15%, transparent); }
+.hover\:bg-wisdom-cyan-dark:hover { filter: brightness(0.92); }
+
+/* Keep rest of polish utilities from original file structure */
+.card-3d {
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.card-elevated {
+  box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.55);
+}
+.shadow-card-3d {
+  box-shadow: 0 22px 50px -28px rgba(0, 0, 0, 0.6);
+}
+.shadow-glow {
+  box-shadow: 0 0 28px color-mix(in srgb, var(--cyan) 35%, transparent);
+}
+.animate-fade-up {
+  animation: fadeUp 0.7s ease both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.field-input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.75rem 1rem;
+  color: var(--foreground);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.field-input:focus {
+  border-color: color-mix(in srgb, var(--cyan) 55%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--cyan) 25%, transparent);
+}
+.field-input:hover {
+  border-color: rgba(255, 255, 255, 0.26);
+}
+.theme-light .field-input {
+  background: #f5f9fd;
+  border-color: rgba(12, 60, 100, 0.2);
+  color: #0c1a2e;
+}
+@media (prefers-reduced-motion: reduce) {
+  .stagger-children > *,
+  .card-3d,
+  .text-gradient-cyan {
+    animation: none !important;
+  }
 }
